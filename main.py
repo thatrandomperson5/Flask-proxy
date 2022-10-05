@@ -10,7 +10,9 @@ app = Flask(__name__)
 def home():
     return "Luanch test"
 
-def makePageRender(url):
+def makePageRender(url, browser):
+    if browser is none:
+        browser = "chrome"
     rq = requests.get(url)
     if not rq.status_code in range(200, 299):
         abort(403)
@@ -33,5 +35,5 @@ def pageRender():
     url = args.get("url")
     if not url_re.match(url):
         return "Invalid url"
-    output = makePageRender(url)
+    output = makePageRender(url, args.get("browser"))
     return output
