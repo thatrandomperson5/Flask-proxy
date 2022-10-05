@@ -25,9 +25,24 @@ def makePageRender(url, browser):
     if not rq.status_code in range(200, 299):
         return "Request Error"
     soup = BeautifulSoup(rq.content, 'html.parser')
-    HttpProxyConnector = """
-    console.log('test')
-    """
+    HttpProxyConnector = '''
+    console.log("Setting up proxy")
+    window.addEventListener('load', () => {
+        if (!('serviceWorker' in navigator)) {
+        // service workers not supported
+        return
+    }
+
+    navigator.serviceWorker.register('/static/HttpHandler.js').then(
+            () => {
+             // 
+            },
+            err => {
+            console.error('Service Worker registration failed!', err)
+        }
+        )
+    })
+    '''
     script = soup.new_tag("script")
     script.string = HttpProxyConnector
     soup.head.append(script)
