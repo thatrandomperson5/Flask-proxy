@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from base64 import b64decode
 import json
 from utils import url_re
@@ -11,7 +11,17 @@ def home():
     return "Luanch test"
 
 def makePageRender(url):
-    pass
+    rq = requests.get(url)
+    if not rq.status_code in range(200, 299):
+        abort(403)
+    soup = BeautifulSoup(rq.content, 'html.parser')
+    HttpProxyConnector = """
+    console.log('test')
+    """
+    script = soup.new_tag("script")
+    script.string = HttpProxyConnector
+    soup.head.insert(script)
+    return soup.prettify()
 
 @app.route("/tools/pagerender")
 def pageRender():
