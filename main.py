@@ -20,7 +20,7 @@ def makePageRender(url, browser):
         br = request.headers.get('User-Agent')
     else:
         br = browser_agents.get(browser)
-    rqheaders = {"User-Agent": br}
+    rqheaders = {"User-Agent": br, "Referer": url}
     rq = requests.get(url, headers=rqheaders)
     if not rq.status_code in range(200, 299):
         return "Request Error"
