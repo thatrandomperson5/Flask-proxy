@@ -1,5 +1,5 @@
 self.addEventListener( "install", function( event ){
-    console.log( "WORKER: install event in progress." );
+    self.skipWaiting();
 });
 self.addEventListener( "activate", event => {
     console.log('WORKER: activate event in progress.');
