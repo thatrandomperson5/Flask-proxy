@@ -13,3 +13,6 @@ def pageRender():
     args = request.args
     if "b64" in args:
         args = json.loads(b64decode(args.get("b64")))
+    if not "url" in args:
+        return "Invalid url"
+    url = args.get("url")
