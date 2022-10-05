@@ -1,7 +1,7 @@
 from flask import Flask, request, abort
 from base64 import b64decode
 import json, requests
-from utils import url_re
+from utils import url_re, browser_agents
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
@@ -12,8 +12,16 @@ def home():
 
 def makePageRender(url, browser):
     if browser is None:
-        browser = "chrome"
-    rq = requests.get(url)
+        browser = "inherit"
+    if not browser == "inherit":
+        if not browser in browser_agents:
+            return "Invalid browser"
+    if browser == "inherit":
+        br = request.headers.get('User-Agent')
+    else:
+        br = browser_agents.get(browser)
+    rqheaders = {"User-Agent": br}
+    rq = requests.get(url, headers=rqheaders)
     if not rq.status_code in range(200, 299):
         abort(403)
     soup = BeautifulSoup(rq.content, 'html.parser')
