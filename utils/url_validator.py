@@ -91,4 +91,4 @@ regex = re.compile(  # noqa: W605
     re.UNICODE | re.IGNORECASE
 )
 
-pattern = re.compile(regex)
+url_re = re.compile(regex)
