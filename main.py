@@ -1,7 +1,7 @@
 from flask import Flask, request
 from base64 import b64decode
 import json
-from utils/url_validator import url_re
+from utils import url_re
 
 app = Flask(__name__)
 
