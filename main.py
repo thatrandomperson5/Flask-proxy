@@ -16,4 +16,6 @@ def pageRender():
     if not "url" in args:
         return "Invalid url"
     url = args.get("url")
+    if not url_re.match(url):
+        return "Invalid url"
     return "Ok"
