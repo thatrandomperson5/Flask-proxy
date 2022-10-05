@@ -23,7 +23,7 @@ def makePageRender(url, browser):
     rqheaders = {"User-Agent": br}
     rq = requests.get(url, headers=rqheaders)
     if not rq.status_code in range(200, 299):
-        abort(403)
+        return "Request Error"
     soup = BeautifulSoup(rq.content, 'html.parser')
     HttpProxyConnector = """
     console.log('test')
