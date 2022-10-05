@@ -11,7 +11,7 @@ def home():
     return "Luanch test"
 
 def makePageRender(url, browser):
-    if browser is none:
+    if browser is None:
         browser = "chrome"
     rq = requests.get(url)
     if not rq.status_code in range(200, 299):
