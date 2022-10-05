@@ -1,6 +1,6 @@
 from flask import Flask, request, abort
 from base64 import b64decode
-import json
+import json, requests
 from utils import url_re
 from bs4 import BeautifulSoup
 
