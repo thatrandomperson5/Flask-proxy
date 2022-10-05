@@ -16,3 +16,4 @@ def pageRender():
     if not "url" in args:
         return "Invalid url"
     url = args.get("url")
+    return "Ok"
