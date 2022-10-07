@@ -26,7 +26,8 @@ def makePageRender(url, browser):
         return "Request Error"
     soup = BeautifulSoup(rq.content, 'html.parser')
     HttpProxyConnector = '''
-    console.log("Setting up proxy")
+    console.log("Setting up proxy");
+    
     window.addEventListener('load', () => {
         if (!('serviceWorker' in navigator)) {
         // service workers not supported
@@ -35,7 +36,7 @@ def makePageRender(url, browser):
 
     navigator.serviceWorker.register('/static/HttpHandler.js').then(
             () => {
-             // 
+             document.body.innerHTML += "Serivce worker active";
             },
             err => {
             console.error('Service Worker registration failed!', err)
