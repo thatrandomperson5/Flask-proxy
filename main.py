@@ -45,7 +45,7 @@ def makePageRender(url, browser):
     '''
     script = soup.new_tag("script")
     script.string = HttpProxyConnector
-    soup.head.append(script)
+    soup.head.insert(0, script)
     return soup.prettify()
 
 @app.route("/tools/pagerender")
