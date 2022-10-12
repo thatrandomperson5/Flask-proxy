@@ -21,7 +21,7 @@ def makePageRender(url, browser):
     else:
         br = browser_agents.get(browser)
     rqheaders = {"User-Agent": br, "Referer": url}
-    rq = requests.get(url, headers=rqheaders)
+    rq = requests.get(url, headers=rqheaders, verify=False)
     if not rq.status_code in range(200, 299):
         return "Request Error"
     soup = BeautifulSoup(rq.content, 'html.parser')
